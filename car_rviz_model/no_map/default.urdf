@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="car">
+  <link name="rslidar">
+    <visual name="base_visual">
+      <origin xyz="0.4 0 -2" rpy="1.5708 0 -1.5708" />
+      <geometry>
+        <mesh filename="package://lidar_perception/car_rviz_model/no_map/CAR_original.dae" scale="1.6 1.6 1.6"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>
