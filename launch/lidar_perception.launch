@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- Console launch prefix -->
+  <arg name="launch_prefix" default=""/>
+
+  <!-- Load parameters -->
+  <rosparam command="load" ns="lidar_perception" file="$(find lidar_perception)/cfg/lidar_perception.yaml"/>
+
+  <!-- Start node -->
+  <!--node pkg="rs_process" type="rs_process_node" name="rs_process" output="screen" launch-prefix="xterm -e gdb -ex run args"-->
+  <node pkg="lidar_perception" type="lidar_perception_node" name="lidar_registration" output="screen">
+  </node>
+
+  <!--display/-->
+  <!--car module for ui display-->
+  <group>
+    <arg name="gui" default="False" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <param name="robot_description" textfile="$(find lidar_perception)/car_rviz_model/no_map/default.urdf" />
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"  />
+    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher"  />
+  </group>
+
+  <!--rviz show-->
+  <node pkg="rviz" type="rviz" name="rviz"  args="-d $(find lidar_perception)/rviz/lidar_perception.rviz"/>
+
+ 
+</launch>
